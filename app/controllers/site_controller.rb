@@ -1,8 +1,7 @@
 class SiteController < ApplicationController
-  def index
-    
+  def welcome
   end
-
+  
   def dashboard
   end
 end
