@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if (@user.save)
+      flash[:success] = "You have successfully registered!"
       redirect_to dashboard_path
     else
       render 'new'
