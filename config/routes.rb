@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   # get 'site/dashboard'
 
   # get 'site_controller/index'
-
+  resources :users
+  
   root 'site#welcome'
 
   # The priority is based upon order of creation: first created -> highest priority.
