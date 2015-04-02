@@ -1,0 +1,42 @@
+<% provide(:title, "Edit user") %>
+<h1>Edit profile</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+    <legend></legend>
+    <div class="form-group">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, :class => 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, :class => 'form-control' %>
+
+    </div>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email, :class => 'form-control' %>
+      
+    </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, :class => 'form-control' %>
+      
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, "Confirm Password" %>
+      <%= f.password_field :password_confirmation, :class => 'form-control' %>
+      
+    </div>
+    <div class="form-group">
+      <%= gravatar_for @user %>
+      <a href="http://gravatar.com/emails" id="avatar">Update your picture from Gravatar service</a>  
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Save", :class => "btn btn-primary" %>
+    </div>      
+    <% end %>
+  </div>
+</div>
