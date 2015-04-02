@@ -19,7 +19,21 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
+    # @user = User.find(params[:id])
+  end
+
+  def update
+    #puts YAML::dump(params)
+    puts YAML::dump(current_user)
+    if current_user.update_attributes(user_params)
+      flash.now[:success] = "Profile updated."
+      redirect_to dashboard_path
+    else
+      flash.now[:danger] = "Could not update your profile."
+      render 'edit'
+    end
+    #puts YAML::dump(current_user)
   end
 
   private

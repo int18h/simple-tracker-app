@@ -12,6 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= bootstrap_sprockets
 //= require turbolinks
+//= require bootstrap
 //= require_tree .
+
+
+$(function () {
+  $('[data-toggle="popover"]').popover({ html: true });
+});
+
