@@ -19,10 +19,15 @@
 
 $(document).ready(function () {
   $('[data-toggle="popover"]').popover({ html: true });
+  
   $('.datepicker').datepicker();
+  
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
-  });
+    menuToggle();
+  });  
 });
 
+function menuToggle() {
+  $("#wrapper").toggleClass("toggled");
+}
