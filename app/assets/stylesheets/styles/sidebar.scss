@@ -18,7 +18,7 @@
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #eeeeee;
+    background: #f8f8f8;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -77,14 +77,16 @@
     height: 65px;
     font-size: 18px;
     line-height: 60px;
+    border-bottom: 1px dashed #e7e7e7
 }
 
 .sidebar-nav > .sidebar-brand a {
-    color: #999999;
+    color: #000;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
+    
+    color: #5e5e5e;
     background: none;
 }
 
