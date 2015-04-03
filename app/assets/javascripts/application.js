@@ -13,11 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
 //= require_tree .
 
 
 $(document).ready(function () {
   $('[data-toggle="popover"]').popover({ html: true });
+  $('.datepicker').datepicker();
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
