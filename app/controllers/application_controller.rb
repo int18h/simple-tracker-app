@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   before_action :require_sign_in
   
+  helper_method :redirect_to
+
   private
     def require_sign_in
       unless signed_in?
