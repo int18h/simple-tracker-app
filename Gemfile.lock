@@ -46,6 +46,9 @@ GEM
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
+    bootstrap-will_paginate (0.0.10)
+      will_paginate
+    bootstrap_form (2.3.0)
     builder (3.2.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -201,6 +204,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    selectize-rails (0.12.0)
     selenium-webdriver (2.45.0)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
@@ -244,6 +248,8 @@ DEPENDENCIES
   autoprefixer-rails
   bcrypt-ruby
   bootstrap-sass
+  bootstrap-will_paginate
+  bootstrap_form
   capybara
   childprocess
   coffee-rails
@@ -258,8 +264,9 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   sdoc
+  selectize-rails
   selenium-webdriver
   spork-rails
   sqlite3
   uglifier
-  will_paginate (~> 3.0.6)
+  will_paginate

@@ -10,16 +10,12 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => 'form-control'%>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  
+  <div class="form-group">
+    <%= f.submit :class=>"btn btn-primary" %>
   </div>
 <% end %>

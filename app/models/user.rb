@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, length: {minimum: 6}
+  has_many :teams, dependent: :destroy
   def full_name
     "#{first_name} #{last_name}"
   end

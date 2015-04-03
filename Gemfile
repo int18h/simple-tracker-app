@@ -27,7 +27,10 @@ gem 'childprocess'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'bcrypt-ruby'
-gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+gem 'selectize-rails'
+gem 'bootstrap_form'
 group :doc do
   gem 'sdoc', require: false
 end
