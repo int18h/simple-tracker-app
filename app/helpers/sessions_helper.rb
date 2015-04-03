@@ -31,4 +31,12 @@ module SessionsHelper
     self.current_user = nil
   end
 
+  def show_sidebar_if(signed)
+    "toggled" if (!signed)
+  end
+
+  def hidden_if(signed)
+    "display: none" if (!signed)
+  end
+
 end

@@ -17,8 +17,10 @@
 
 
 $(document).ready(function () {
-  $(function () {
-    $('[data-toggle="popover"]').popover({ html: true });
+  $('[data-toggle="popover"]').popover({ html: true });
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
   });
 });
 
