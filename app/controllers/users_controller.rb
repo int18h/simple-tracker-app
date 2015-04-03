@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_sign_in, only: [:new, :create]
+  skip_before_action :require_sign_in, only: [:new, :create, :forgot_password]
   def index
   end
 
@@ -34,6 +34,10 @@ class UsersController < ApplicationController
       render 'edit'
     end
     #puts YAML::dump(current_user)
+  end
+
+  def forgot_password
+    @user = User.new(email: params[:email])
   end
 
   private
