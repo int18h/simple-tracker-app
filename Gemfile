@@ -31,6 +31,7 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'selectize-rails'
 gem 'bootstrap_form'
+gem 'bootstrap-datepicker-rails'
 group :doc do
   gem 'sdoc', require: false
 end
