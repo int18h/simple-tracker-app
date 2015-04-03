@@ -25,7 +25,7 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
-    @team.user_id = current_user.id
+    @team.owner_id = current_user.id
     respond_to do |format|
       if @team.save
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
@@ -42,7 +42,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       
-      @team.user_id = current_user.id
+      @team.owner_id = current_user.id
       if @team.update(team_params)
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }

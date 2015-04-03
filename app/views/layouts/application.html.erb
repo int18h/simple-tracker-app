@@ -11,7 +11,11 @@
   <%= render('layouts/header') %>
   <div id="wrapper" class="<%= show_sidebar_if(signed_in?)%>">
   <%= render('layouts/sidebar') %>
-    <div id="page-content-wrapper no-padding">
+  <% if (signed_in?) %>
+    <div id="page-content-wrapper" class="no-padding">
+  <% else %>
+    <div id="page-content-wrapper">
+  <% end %>
         <div class="container-fluid">
         <%= render('layouts/flash') %>
             <div class="row">
