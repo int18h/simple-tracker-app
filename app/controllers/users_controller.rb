@@ -37,7 +37,15 @@ class UsersController < ApplicationController
   end
 
   def forgot_password
-    @user = User.new(email: params[:email])
+    puts YAML::dump(params)
+    @user = User.find_by_email(params[:email])
+    if (!@user.nil?) 
+      UserMailer.forgot_password_email(@user).deliver_later
+      redirect_to signin_path
+
+    else
+      render "forgot_password"
+    end
   end
 
   private
