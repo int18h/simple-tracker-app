@@ -4,6 +4,8 @@
   <title>Tracker App | <%= yield(:title) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<!-- comment if don't want to use charts -->
+  <%= #javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <%= csrf_meta_tags %>
   <%= render('layouts/shim') %>
 </head>
