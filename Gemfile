@@ -32,6 +32,10 @@ gem 'bootstrap-will_paginate'
 gem 'selectize-rails'
 gem 'bootstrap_form'
 gem 'bootstrap-datepicker-rails'
+gem 'chartkick'
+gem 'groupdate'
+gem 'hightop'
+gem 'active_median'
 group :doc do
   gem 'sdoc', require: false
 end

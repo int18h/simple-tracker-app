@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :projects
-  resources :teams
+  resources :teams do 
+    resources :workers
+  end
   resources :users
   resources :sessions, only: [:new, :create, :destroy]  
   root 'site#welcome'
