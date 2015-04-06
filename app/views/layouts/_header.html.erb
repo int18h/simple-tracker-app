@@ -7,14 +7,12 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <%= link_to root_path, :class => 'navbar-brand' do %>
-      <strong>Tracker App</strong>
-      
-    <% end %>
     <% if signed_in? %>
-    <a href="#" class="navbar-brand no-padding-left" id="menu-toggle">
-        <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
-    </a>
+      <a href="#" class="navbar-brand" id="menu-toggle">
+          <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>Tracker App 
+      </a>
+    <% else %>
+      <%= link_to "Tracker App", root_path, :class => "navbar-brand" %>
     <% end %>
   </div>
   <!-- Collect the nav links, forms, and other content for toggling -->

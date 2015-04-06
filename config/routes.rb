@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'site#welcome'
   get '/dashboard' => 'site#dashboard'
   match '/signup', to: 'users#new', via: 'get'
+  match '/forgot', to: 'users#forgot_password', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
 
