@@ -106,6 +106,8 @@ GEM
       guard (~> 2.0)
       guard-compat (~> 1.0)
       spork (>= 0.8.4)
+    hightop (0.1.2)
+      activerecord
     hike (1.2.3)
     hitimes (1.2.2)
     i18n (0.7.0)
@@ -267,6 +269,7 @@ DEPENDENCIES
   groupdate
   guard-rspec
   guard-spork
+  hightop
   jbuilder
   jquery-rails
   pg
