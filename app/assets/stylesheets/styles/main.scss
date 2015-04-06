@@ -12,6 +12,10 @@
   -moz-box-shadow: 0 0 10px rgba(189,189,189,0.4);
 }
 
+.block-inline {
+  display: inline-block !important;
+}
+
 #menu-toggle > .glyphicon {
   top: 3px;
   right: 5px;
