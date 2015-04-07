@@ -1,10 +1,19 @@
-<h1 class="page-header"><%= @team.name %></h1>
+<%= header('h1', {:title => 'Show team', :text => @team.name, :buttons => { 
+  :edit => { 
+    :caption => 'Edit', 
+    :path => edit_team_path(@team), 
+    :class=>'btn btn-primary'
+  },
+  
+}}) %>
 <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Owner:</strong>
-  <%= @team.owner.full_name %>
+  <%= profile_link_to_user(@team.owner) %>
 </p>
 
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
+<%= header('h3', {:text => 'Teammates'}) %>
+<%= render @team %>
+
+<%= header('h3', {:text => 'Join new member to this team'}) %>

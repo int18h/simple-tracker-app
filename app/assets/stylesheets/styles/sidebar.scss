@@ -1,4 +1,4 @@
-#wrapper {
+#wrapper, #wrapper-welcome {
     margin-top: 50px;
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -6,6 +6,8 @@
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
+
+
 
 #wrapper.toggled {
     padding-left: 250px;

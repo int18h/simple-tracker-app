@@ -63,6 +63,27 @@ class TeamsController < ApplicationController
     end
   end
 
+  def search_member
+    respond_to do |format|
+      format.html { redirect_to @team }
+      format.json { render json: @members, only: [:id, :username] }
+    end
+  end
+
+  def add_member
+    respond_to do |format|
+      format.html { redirect_to @team, notice: 'Member was successfully removed.' }
+      format.js
+    end
+  end
+
+  def remove_member
+    respond_to do |format|
+      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # # Use callbacks to share common setup or constraints between actions.
     # def set_team
