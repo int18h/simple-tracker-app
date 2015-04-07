@@ -39,11 +39,11 @@ module SessionsHelper
     "display: none" if (!signed)
   end
 
-  def profile_link_to_current_user
-    return "#{link_to current_user.full_name, edit_user_path(current_user)}".html_safe if (self.signed_in?)
+  def profile_link_to_current_user()
+    return "#{link_to current_user.full_name, user_path(current_user)}".html_safe if (self.signed_in?)
   end
 
   def profile_link_to_user(user)
-    return "#{link_to user.full_name, edit_user_path(user)}".html_safe
+    return "#{link_to user.full_name, user_path(user)}".html_safe
   end
 end

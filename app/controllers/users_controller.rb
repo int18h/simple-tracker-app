@@ -25,12 +25,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = current_user
+  end
+
   def update
     if current_user.update_attributes(user_params)
       flash.now[:success] = "Profile updated."
       redirect_to dashboard_path
     else
       flash.now[:danger] = "Could not update your profile."
+      @user = current_user
       render 'edit'
     end
     #puts YAML::dump(current_user)
