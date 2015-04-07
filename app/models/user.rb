@@ -10,8 +10,7 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, length: {minimum: 6}
-  has_many :teams, dependent: :destroy
-  before_destroy :ensure_not_referenced_by_any_team
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -26,13 +25,5 @@ class User < ActiveRecord::Base
   private
     def create_remember_token
       self.remember_token = User.encrypt(User.new_remember_token)
-    end
-
-    def ensure_not_referenced_by_any_team
-      if teams.empty?
-        return true
-      else
-        errors.add(:base, "User is still a member of the teams.")
-      end
     end
 end

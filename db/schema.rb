@@ -11,38 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403144358) do
-
-  create_table "projects", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "status"
-    t.datetime "finished_at"
-    t.integer  "user_id"
-    t.integer  "team_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "projects", ["team_id"], name: "index_projects_on_team_id"
-  add_index "projects", ["user_id"], name: "index_projects_on_user_id"
-
-  create_table "teams", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "owner_id"
-  end
-
-  add_index "teams", ["owner_id"], name: "index_teams_on_owner_id"
-  add_index "teams", ["user_id"], name: "index_teams_on_user_id"
+ActiveRecord::Schema.define(version: 20150401214512) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "role"
-    t.boolean  "admin"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
@@ -51,15 +26,5 @@ ActiveRecord::Schema.define(version: 20150403144358) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
-
-  create_table "workers", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "workers", ["team_id"], name: "index_workers_on_team_id"
-  add_index "workers", ["user_id"], name: "index_workers_on_user_id"
 
 end
