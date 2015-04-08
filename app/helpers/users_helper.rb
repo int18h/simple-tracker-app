@@ -9,5 +9,4 @@ module UsersHelper
   def profile_link_to_user(user)
     return "#{link_to user.full_name, user_path(user)}".html_safe
   end
-
 end

@@ -73,11 +73,18 @@ class TeamsController < ApplicationController
   end
 
   def remove_member
+    @member = User.find(params[:user_id])
+    @team.users.delete(@member)
+    respond_to do |format|
+      format.html { redirect_to @team, notice: 'Member was successfully removed.' }
+      format.js
+    end
   end
 
   def search_member
     query = params[:q]
-    @members = User.all.where('last_name LIKE ? AND id NOT IN (?)', "%#{query}%", @team.users.pluck(:id))
+    #@members = User.all.where('last_name LIKE ? AND id NOT IN (?)', "%#{query}%", @team.users.pluck(:id))
+    @members = User.all.where('last_name LIKE ?', "%#{query}%")
     respond_to do |format|
       format.html { redirect_to @team }
       format.json { render json: @members, only: [:id, :full_name], :methods => :full_name }

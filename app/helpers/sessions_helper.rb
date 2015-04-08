@@ -52,4 +52,5 @@ module SessionsHelper
   def profile_link_to_current_user
     return "#{link_to current_user.full_name, user_path(current_user)}".html_safe if (self.signed_in?)
   end
+
 end
