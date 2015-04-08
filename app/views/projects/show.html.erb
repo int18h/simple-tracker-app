@@ -1,9 +1,9 @@
 <%= header('h1', {
-  :title => 'Show Team', 
-  :text => "Show Team", 
+  :title => 'Show Project', 
+  :text => "Show Project", 
   :buttons => {
-    :edit => {:caption => 'Edit', :class=>'btn btn-primary', :path => edit_team_path(@team)},
-    :back => {:caption => 'Back', :class => 'btn btn-link', :path => teams_path}
+    :edit => {:caption => 'Edit', :class=>'btn btn-primary', :path => edit_project_path(@project)},
+    :back => {:caption => 'Back', :class => 'btn btn-link', :path => projects_path}
   }}) 
 %>
 
@@ -17,17 +17,16 @@
           <tbody>
             <tr>
               <td>Name</td>
-              <td><%= @team.name %></td>
+              <td><%= @project.name %></td>
             </tr>
             <tr>
               <td>Owner</td>
-              <td><%= profile_link_to_user(@team.owner) %></td>
+              <td><%= profile_link_to_user(@project.owner) %></td>
             </tr>
           </tbody>
         </table>
       </div>        
   </div>
-  <div class="col-md-6 col-lg-6">
-    <%= render 'members', members: @team.users, editable: is_owner_of_team(@team) %>
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
   </div>
 </div>
