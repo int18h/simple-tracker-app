@@ -1,0 +1,40 @@
+<div class="col-md-6 col-lg-6">
+    <h5 class="page-header">Search for Issues</h5>
+    <%= form_tag(add_member_team_path, class: 'form-inline', remote: true) do |f| %>
+      <%= label_tag "Issue" %>
+      <%= select_tag 'user_id', {}, {id: 'search-issue-id'} %>
+      <%= submit_tag 'Go', class: 'btn btn-default' %>
+    <% end %>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#search-issue-id').selectize({
+      plugins: ['remove_button'],
+      delimiter: ',',
+      persist: false,
+      valueField: 'id',
+      labelField: 'name',
+      searchField: 'name',
+      options: [],
+      create: false,
+      load: function(query, callback) {
+            // if (query.length < 3) return callback();
+            $.ajax({
+                url: '<%= search_member_team_path %>',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    q: query,
+                },
+                error: function() {
+                    callback();
+                },
+                success: function(res) {
+                    callback(res);
+                }
+            });
+        }
+    });
+  });
+</script>

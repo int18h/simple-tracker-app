@@ -70,6 +70,12 @@ class IssuesController < ApplicationController
     end
   end
 
+  def search_issue
+    respond_to do |format|
+      format.html { redirect_to issues_url }
+      format.json { head :no_content }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_issue

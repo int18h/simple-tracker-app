@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  resources :issues
-  resources :projects
+  resources :projects do
+    resources :issues do 
+        get 'search_issue'
+    end
+  end
   resources :teams
   resources :teams do 
     member do

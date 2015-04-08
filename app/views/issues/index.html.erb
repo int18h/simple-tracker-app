@@ -1,6 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Issues</h1>
+<%= header('h3', {
+  :text => "List of Issues", 
+  :buttons => {
+    :new => {:caption => 'New issue', :class=>'btn btn-primary', :path => new_project_issue_path(project.id)},
+  }}) 
+%>
 
 <table>
   <thead>
@@ -14,20 +17,8 @@
   </thead>
 
   <tbody>
-    <% @issues.each do |issue| %>
-      <tr>
-        <td><%= issue.name %></td>
-        <td><%= issue.description %></td>
-        <td><%= issue.user_id %></td>
-        <td><%= issue.project_id %></td>
-        <td><%= link_to 'Show', issue %></td>
-        <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
-        <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Issue', new_issue_path %>
