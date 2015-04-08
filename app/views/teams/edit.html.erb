@@ -27,7 +27,7 @@
           </tr>
         </thead>
         <tbody>
-        <%= @team.users.each do | member | %>
+        <% @team.users.each do | member | %>
           <%= render 'member_item', member: member %>
         <% end %>
         </tbody>
@@ -42,8 +42,8 @@
       delimiter: ',',
       persist: false,
       valueField: 'id',
-      labelField: 'last_name',
-      searchField: 'last_name',
+      labelField: 'full_name',
+      searchField: 'full_name',
       options: [],
       create: false,
       load: function(query, callback) {

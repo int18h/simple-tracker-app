@@ -37,6 +37,7 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'hightop'
 gem 'active_median'
+gem 'active_model_serializers'
 group :doc do
   gem 'sdoc', require: false
 end

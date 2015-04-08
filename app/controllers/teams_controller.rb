@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_member, :remove_member, :search_member]
 
   # GET /teams
   # GET /teams.json
@@ -77,10 +77,10 @@ class TeamsController < ApplicationController
 
   def search_member
     query = params[:q]
-    @members = User.all.where('last_name LIKE ?', "%#{query}%")
+    @members = User.all.where('last_name LIKE ? AND id NOT IN (?)', "%#{query}%", @team.users.pluck(:id))
     respond_to do |format|
       format.html { redirect_to @team }
-      format.json { render json: @members, only: [:id, :last_name] }
+      format.json { render json: @members, only: [:id, :full_name], :methods => :full_name }
     end
   end
 
