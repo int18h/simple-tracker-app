@@ -1,0 +1,5 @@
+<%= bootstrap_form_for(@team) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.hidden_field :user_id %>
+  <%= f.submit %>
+<% end %>

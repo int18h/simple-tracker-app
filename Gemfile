@@ -7,6 +7,7 @@ gem 'rails', '4.2.1'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'quiet_assets'
 end
 
 group :test do

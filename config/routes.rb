@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  resources :teams
   resources :teams do 
+    member do
+      delete 'remove_member'
+      post   'add_member'
+      get    'search_member'
     end
+  end
   resources :users
   resources :sessions, only: [:new, :create, :destroy]  
   root 'site#welcome'
