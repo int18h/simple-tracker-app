@@ -27,7 +27,5 @@
         </table>
       </div>        
   </div>
-  <div class="col-md-6 col-lg-6">
-    <%= render 'members', members: @team.users, editable: is_owner_of_team(@team) %>
-  </div>
+  <%= render "teammates" %>
 </div>
