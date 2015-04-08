@@ -8,7 +8,7 @@
 <td>
   <%= member.email %>
 </td>
-<% if is_owner_of_team(@team) %>
+<% if editable %>
 <td>
   <%= form_tag(remove_member_team_path, class: 'pull-right', method: :delete, remote: true) do |f| %>
       <%= hidden_field_tag 'user_id', member.id%>
