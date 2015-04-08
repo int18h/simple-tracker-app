@@ -22,6 +22,8 @@ GEM
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
     active_median (0.1.2)
       activerecord
+    active_model_serializers (0.9.3)
+      activemodel (>= 3.2)
     activejob (4.2.1)
       activesupport (= 4.2.1)
       globalid (>= 0.3.0)
@@ -144,6 +146,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -255,6 +259,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_median
+  active_model_serializers
   autoprefixer-rails
   bcrypt-ruby
   bootstrap-datepicker-rails
@@ -273,6 +278,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   pg
+  quiet_assets
   rails (= 4.2.1)
   rails_12factor (= 0.0.2)
   rspec-rails

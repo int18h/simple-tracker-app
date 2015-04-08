@@ -31,6 +31,16 @@ module SessionsHelper
     self.current_user = nil
   end
 
+  def is_owner_of_team(team)
+    if team.owner.id == current_user.id
+      return true
+    else
+      return false
+    end
+  rescue
+    return false
+  end
+
   def show_sidebar_if(signed)
     "toggled" if (!signed)
   end
@@ -39,8 +49,8 @@ module SessionsHelper
     "display: none" if (!signed)
   end
 
-  def profile_link
-    return "#{link_to current_user.full_name, edit_user_path(current_user)}".html_safe if (self.signed_in?)
+  def profile_link_to_current_user
+    return "#{link_to current_user.full_name, user_path(current_user)}".html_safe if (self.signed_in?)
   end
 
 end

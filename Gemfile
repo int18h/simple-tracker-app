@@ -7,6 +7,7 @@ gem 'rails', '4.2.1'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'quiet_assets'
 end
 
 group :test do
@@ -36,6 +37,7 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'hightop'
 gem 'active_median'
+gem 'active_model_serializers'
 group :doc do
   gem 'sdoc', require: false
 end

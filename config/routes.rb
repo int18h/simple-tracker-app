@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :projects
+  resources :teams
   resources :teams do 
-    resources :workers
+    member do
+      delete 'remove_member'
+      post   'add_member'
+      get    'search_member'
+    end
   end
   resources :users
   resources :sessions, only: [:new, :create, :destroy]  

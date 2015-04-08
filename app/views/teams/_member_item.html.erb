@@ -1,0 +1,19 @@
+<tr id="<%= "member-#{member.id}" %>">
+<td>
+  <%= gravatar_for(member, 'small') %>
+</td>
+<td> 
+  <%= profile_link_to_user(member) %>
+</td>
+<td>
+  <%= member.email %>
+</td>
+<% if editable %>
+<td>
+  <%= form_tag(remove_member_team_path, class: 'pull-right', method: :delete, remote: true) do |f| %>
+      <%= hidden_field_tag 'user_id', member.id%>
+      <%= submit_tag 'remove', class: 'btn btn-danger' %>
+  <% end %>
+</td>
+<% end %>
+</tr>
