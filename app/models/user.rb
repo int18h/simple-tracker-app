@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   attr_reader :full_name
 
   has_many :teams, dependent: :destroy
+  has_many :projects, dependent: :destroy
+  #has_many :issues, depedent: :destroy
+
   has_and_belongs_to_many :in_teams, class_name: 'Team', dependent: :destroy
 
   before_save { self.email = email.downcase }

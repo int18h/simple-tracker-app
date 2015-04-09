@@ -1,10 +1,10 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_member, :remove_member, :search_member]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_member, :remove_member]
 
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @teams = current_user.teams
   end
 
   # GET /teams/1
@@ -25,7 +25,6 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = current_user.teams.build(team_params)
-    puts YAML::dump(@team)
     respond_to do |format|
       if @team.save
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
@@ -85,9 +84,10 @@ class TeamsController < ApplicationController
     query = params[:q]
     #@members = User.all.where('last_name LIKE ? AND id NOT IN (?)', "%#{query}%", @team.users.pluck(:id))
     @members = User.all.where('last_name LIKE ?', "%#{query}%")
+    logger.debug @members.to_a
     respond_to do |format|
       format.html { redirect_to @team }
-      format.json { render json: @members, only: [:id, :full_name], :methods => :full_name }
+      format.json { render json: @members, only: [:id, :full_name], :methods => :full_name , :root => false}
     end
   end
 

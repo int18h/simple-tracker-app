@@ -1,5 +1,6 @@
 <% flash.each do |key, value| %>
   <% alert_type = 'success' if key == 'notice' %>
+  <% alert_type = 'danger' if key == 'alert' %>
   <div class="alert alert-<%= alert_type %> <%= 'no-margin' if signed_in? %>">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>

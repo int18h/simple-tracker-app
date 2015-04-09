@@ -1,1 +1,1 @@
-$('#teammates').find('tbody:last').append("<%= escape_javascript(render 'member_item', member: @member) %>");
+$('#teammates').find('tbody:last').append("<%= escape_javascript(render 'member_item', member: @member, editable: is_owner_of_team(@team)) %>");

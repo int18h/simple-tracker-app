@@ -1,0 +1,49 @@
+<%= header('h1', {
+  :title => "Show Issue ##{@issue.id}", 
+  :text => "Issue ##{@issue.id}", 
+  :buttons => {
+    :edit => {:caption => 'Edit', :class=>'btn btn-primary', :path => edit_project_issue_path(@issue.project, @issue)},
+    :back => {:caption => 'Back', :class => 'btn btn-link', :path => project_path(@issue.project)}
+  }}) 
+%>
+
+<div class="row">
+  <div class="col-md-6 col-lg-6">
+    <h5 class="page-header">Information</h5>
+    <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Name</td>
+              <td><%= @issue.name %></td>
+            </tr>
+            <tr>
+              <td>Owner</td>
+              <td><%= profile_link_to_user(@issue.owner) %></td>
+            </tr>
+            <tr>
+              <td>Team</td>
+              <td><%= @issue.project.team.name %></td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td><%= @issue.status.humanize %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>        
+  </div>
+  <div class="col-md-6 col-lg-6">
+    <h5 class="page-header">Content</h5>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= @issue.description %>
+      </div>
+      <div class="panel-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>

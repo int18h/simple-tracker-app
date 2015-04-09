@@ -1,0 +1,7 @@
+<%= bootstrap_form_for(@project) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.hidden_field :user_id %>
+  <%= f.collection_select :team_id, current_user.in_teams, :id, :name, {prompt: "Select team "}, {class: "form-control"} %>
+  <%= f.select :status, options_for_select(Project.statuses.map {|k, v| [k.humanize.capitalize, k]}), {prompt: "Select status"}, {class: "form-control"} %>
+  <%= f.submit %>
+<% end %>
