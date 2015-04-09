@@ -61,6 +61,16 @@ module SessionsHelper
     return false
   end
 
+  def is_owner_of_workload(workload)
+    if (workload.issue.owner.id == current_user.id)
+      return true
+    else
+      false
+    end
+  rescue
+    return false
+  end
+
   def show_sidebar_if(signed)
     "toggled" if (!signed)
   end

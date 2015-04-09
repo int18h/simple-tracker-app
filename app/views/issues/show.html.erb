@@ -1,10 +1,14 @@
+<%
+   buttons = {
+           :back => {:caption => 'Back', :class => 'btn btn-link', :path => project_path(@issue.project)}
+   }
+   buttons[:edit] = {:caption => 'Edit', :class=>'btn btn-primary', :path => edit_project_issue_path(@issue.project, @issue)} if (is_owner_of_issue(@issue))
+%>
 <%= header('h1', {
   :title => "Show Issue ##{@issue.id}", 
   :text => "Issue ##{@issue.id}", 
-  :buttons => {
-    :edit => {:caption => 'Edit', :class=>'btn btn-primary', :path => edit_project_issue_path(@issue.project, @issue)},
-    :back => {:caption => 'Back', :class => 'btn btn-link', :path => project_path(@issue.project)}
-  }}) 
+  :buttons => buttons
+})
 %>
 
 <div class="row">
