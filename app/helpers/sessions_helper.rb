@@ -31,6 +31,16 @@ module SessionsHelper
     self.current_user = nil
   end
 
+  def is_current_user(user)
+    if (user.id == current_user.id)
+      return true
+    else
+      return false
+    end
+  rescue
+    return false
+  end
+
   def is_owner_of_team(team)
     if team.owner.id == current_user.id
       return true
