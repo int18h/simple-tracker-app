@@ -5,6 +5,11 @@ class SiteController < ApplicationController
   end
   
   def dashboard
+    @count_all_teams = Team.all.length
+    @count_all_users = User.all.length
+    @count_all_projects = Project.all.length
+    @count_all_issues = Issue.all.length
+
   end
 
   def log_time
