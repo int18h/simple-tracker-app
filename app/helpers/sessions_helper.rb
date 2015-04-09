@@ -62,7 +62,7 @@ module SessionsHelper
   end
 
   def is_owner_of_workload(workload)
-    if (workload.issue.owner.id == current_user.id)
+    if (workload.issue.owner.id == current_user.id || workload.user.id == current_user.id)
       return true
     else
       false
