@@ -29,11 +29,23 @@ class User < ActiveRecord::Base
   def User.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
-  def is_owner_of_team(user)
-    return true if (current_user.id == owner.id)
-  rescue
-    return false
+  
+  def count_teams
+    teams.length
   end
+
+  def count_projects
+    projects.length
+  end
+
+  def count_all_issues
+    count = 0
+    projects.each do | projects |
+      count += issue.length
+    end
+    return count
+  end
+
   private
     def set_full_name
       @full_name = "#{first_name} #{last_name}"

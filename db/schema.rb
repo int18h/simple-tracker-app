@@ -30,10 +30,9 @@ ActiveRecord::Schema.define(version: 20150409120732) do
     t.string   "name"
     t.integer  "user_id"
     t.integer  "team_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "status",          default: 1
-    t.float    "estimated_hours"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "status",     default: 1
   end
 
   add_index "projects", ["name"], name: "index_projects_on_name", unique: true

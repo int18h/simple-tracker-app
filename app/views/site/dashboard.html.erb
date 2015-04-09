@@ -1,32 +1,41 @@
 <%= page_header('Dashboard', "Dashboard") %>
 <div class="row">
-  <div class="box col-md-4">
+  <div class="box col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Panel title</h3>
+        <h3 class="panel-title">Teams and Users</h3>
       </div>
       <div class="panel-body">
         Panel content
       </div>
     </div>
   </div>
-  <div class="box col-md-4">
+  <div class="box col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Panel title</h3>
+        <h3 class="panel-title">Projects and Issues</h3>
       </div>
       <div class="panel-body">
         Panel content
       </div>
     </div>
   </div>
-  <div class="box col-md-4">
+</div>
+<div class="row">
+  <div class="box col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Panel title</h3>
+        <h3 class="panel-title">Quick log time on selected issue</h3>
       </div>
       <div class="panel-body">
-        Panel content
+          <%= form_tag(logtime_url, method: :post, class: 'form-horizontal') do |f| %>
+              <%= label_tag "Issue" %>
+              <%= select_tag 'issue_id', {}, {id: 'search-issue-id'} %>
+              <%= text_area_tag 'description', '', {class: 'form-control'} %>
+              <%= text_field_tag 'hours', '', {class: 'form-control box'}%>
+              <%= submit_tag 'Log', class: 'btn btn-default' %>
+          <% end %>
+      </div>
       </div>
     </div>
   </div>
