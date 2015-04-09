@@ -5,6 +5,7 @@ class Issue < ActiveRecord::Base
   has_many :workloads
   validates :name, presence: true, uniqueness: true
   validates :user_id, presence: true
+  validates :description, presence: true
   validates :estimated_hours, numericality: {greater_than_or_equal_to: 0.01}
   validates :status, presence: true
 end

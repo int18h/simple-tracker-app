@@ -1,10 +1,15 @@
+<%  buttons = {
+        :back => {:caption => 'Back', :class => 'btn btn-link', :path => projects_path}
+    }
+   if (is_owner_of_project(@project))
+     buttons[:edit] = {:caption => 'Edit', :class=>'btn btn-primary', :path => edit_project_path(@project)}
+   end
+%>
 <%= header('h1', {
-  :title => 'Show Project', 
-  :text => @project.name, 
-  :buttons => {
-    :edit => {:caption => 'Edit', :class=>'btn btn-primary', :path => edit_project_path(@project)},
-    :back => {:caption => 'Back', :class => 'btn btn-link', :path => projects_path}
-  }}) 
+      :title => 'Show Project',
+      :text => @project.name,
+      :buttons => buttons
+    })
 %>
 
 <div class="row">

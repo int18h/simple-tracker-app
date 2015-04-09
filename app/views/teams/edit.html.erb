@@ -1,5 +1,13 @@
-<%= page_header('Editing Team', "Editing team", teams_path) %>
+<%
+   buttons = {:back => {:caption => 'Back', :class => 'btn btn-link', :path => team_path(@team)} }
+%>
 
+<%= header('h1', {
+       :title => 'Edit Team',
+       :text => "Edit team",
+       :buttons => buttons
+    })
+%>
 <div class="row">
   <div class="col-md-6 col-lg-6">
   <h5 class="page-header">Team information</h5>
