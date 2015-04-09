@@ -1,6 +1,8 @@
-<td><%= workload.description %></td>
-<td><%= workload.hours %></td>
-<td><%= workload.user %></td>
-<td><%= link_to 'Show', workload %></td>
-<td><%= link_to 'Edit', edit_workload_path(workload) %></td>
-<td><%= link_to 'Destroy', workload, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<tr>
+    <td><%= workload.description %></td>
+    <td><%= workload.hours %></td>
+    <td><%= profile_link_to_user(workload.user) %></td>
+    <td><%= link_to 'Show', project_issue_workload_path(issue_id: workload.issue.id, id: workload.id) %></td>
+    <td><%= link_to 'Edit', edit_project_issue_workload_path(issue_id: workload.issue.id, id: workload.id) %></td>
+    <td><%= link_to 'Destroy', project_issue_workload_path(issue_id: workload.issue.id, id: workload.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

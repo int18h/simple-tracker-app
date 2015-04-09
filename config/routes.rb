@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  resources :workloads
+#  resources :workloads
   resources :projects do
     resources :issues do 
         get 'search_issue'
-        resources :workloads do 
-        end
+        resources :workloads
     end
   end
   resources :teams

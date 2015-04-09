@@ -14,12 +14,12 @@
 
         <tbody>
         <% issue.workloads.each do |workload| %>
-            <%= render '_workload' %>
+            <%= render 'workloads/workload', workload: workload %>
         <% end %>
         </tbody>
     </table>
 
     <br>
 
-    <%= link_to 'New Workload', new_workload_path %>
+    <%= link_to 'New Workload', new_project_issue_workload_path(issue_id: issue.id) %>
 </div>

@@ -1,5 +1,7 @@
 class WorkloadsController < ApplicationController
   before_action :set_workload, only: [:show, :edit, :update, :destroy]
+  before_action :set_workload_by_issue, only: [:new, :create]
+  before_action :set_workloads_by_issue, only: [:index]
 
   # GET /workloads
   # GET /workloads.json
@@ -14,7 +16,7 @@ class WorkloadsController < ApplicationController
 
   # GET /workloads/new
   def new
-    @workload = Workload.new
+
   end
 
   # GET /workloads/1/edit
@@ -24,12 +26,11 @@ class WorkloadsController < ApplicationController
   # POST /workloads
   # POST /workloads.json
   def create
-    @workload = Workload.new(workload_params)
-
     respond_to do |format|
-      if @workload.save
-        format.html { redirect_to @workload, notice: 'Workload was successfully created.' }
-        format.json { render :show, status: :created, location: @workload }
+      if @workload.update_attributes(workload_params)
+        @workload.user = @workload.issue.project.team.users.find(workload_params[:user_id])
+        format.html { redirect_to [@workload.issue.project, @workload.issue], notice: 'Workload was successfully created.' }
+        format.json { render json: @workload, status: :created}
       else
         format.html { render :new }
         format.json { render json: @workload.errors, status: :unprocessable_entity }
@@ -42,8 +43,10 @@ class WorkloadsController < ApplicationController
   def update
     respond_to do |format|
       if @workload.update(workload_params)
-        format.html { redirect_to @workload, notice: 'Workload was successfully updated.' }
-        format.json { render :show, status: :ok, location: @workload }
+        #@workload.issue = Issue.find(params[:issue_id])
+        logger.debug @workload.issue
+        format.html { redirect_to [@workload.issue.project, @workload.issue], notice: 'Workload was successfully updated.' }
+        format.json { render json: @workload, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @workload.errors, status: :unprocessable_entity }
@@ -56,7 +59,7 @@ class WorkloadsController < ApplicationController
   def destroy
     @workload.destroy
     respond_to do |format|
-      format.html { redirect_to workloads_url, notice: 'Workload was successfully destroyed.' }
+      format.html { redirect_to project_issue_workload_path, notice: 'Workload was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,10 +68,27 @@ class WorkloadsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_workload
       @workload = Workload.find(params[:id])
+      @issue = Issue.find(params[:issue_id])
+      redirect_to @workload.issue, alert: 'You cannot set offline time for issue in closed project' if @workload.issue.project.closed?
+    end
+
+    def set_workload_by_issue
+      @issue = Issue.find(params[:issue_id])
+      redirect_to @issue, alert: 'You cannot add time for issue in closed project' if @issue.project.closed?
+      begin
+        @workload = Workload.new
+        @workload.user = current_user
+        @workload.issue = @issue
+      end if @workload.nil?
+    end
+
+    def set_workloads_by_issue
+      @workloads = Workload.all.find_by(issue_id: params[:issue_id], user_id: params[:user_id])
+      @workloads = [] if @workloads.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def workload_params
-      params.require(:workload).permit(:description, :hours, :issues, :users)
+      params.require(:workload).permit(:description, :hours, :issue_id, :user_id)
     end
 end
