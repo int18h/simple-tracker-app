@@ -1,10 +1,14 @@
+<%
+   buttons = {
+           :back => {:caption => 'Back', :class => 'btn btn-link', :path => project_path(@issue.project)}
+   }
+   buttons[:edit] = {:caption => 'Edit', :class=>'btn btn-primary', :path => edit_project_issue_path(@issue.project, @issue)} if (is_owner_of_issue(@issue))
+%>
 <%= header('h1', {
   :title => "Show Issue ##{@issue.id}", 
   :text => "Issue ##{@issue.id}", 
-  :buttons => {
-    :edit => {:caption => 'Edit', :class=>'btn btn-primary', :path => edit_project_issue_path(@issue.project, @issue)},
-    :back => {:caption => 'Back', :class => 'btn btn-link', :path => project_path(@issue.project)}
-  }}) 
+  :buttons => buttons
+})
 %>
 
 <div class="row">
@@ -41,9 +45,11 @@
       <div class="panel-body">
         <%= @issue.description %>
       </div>
-      <div class="panel-footer">
-        
-      </div>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-lg-12 box">
+    <%= render template: "workloads/index", locals: { :issue => @issue } %>
   </div>
 </div>

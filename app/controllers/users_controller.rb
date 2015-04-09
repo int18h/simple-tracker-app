@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :require_sign_in, only: [:new, :create, :forgot_password]
   def index
+    redirect_to user_path(current_user)
   end
 
   def new
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def update

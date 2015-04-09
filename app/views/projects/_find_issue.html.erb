@@ -1,8 +1,8 @@
 <div class="col-md-6 col-lg-6">
     <h5 class="page-header">Find and edit issue</h5>
-    <%= form_tag(add_member_team_path, class: 'form-inline', remote: true) do |f| %>
+    <%= form_tag(project_goto_issue_path(@project), method: :post, class: 'form-inline') do |f| %>
       <%= label_tag "Issue" %>
-      <%= select_tag 'user_id', {}, {id: 'search-issue-id'} %>
+      <%= select_tag 'issue_id', {}, {id: 'search-issue-id'} %>
       <%= submit_tag 'Go', class: 'btn btn-default' %>
     <% end %>
   </div>
@@ -21,7 +21,7 @@
       load: function(query, callback) {
             // if (query.length < 3) return callback();
             $.ajax({
-                url: '<%= search_member_team_path %>',
+                url: '<%= project_search_issue_path(@project.id) %>',
                 type: 'GET',
                 dataType: 'json',
                 data: {

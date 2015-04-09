@@ -1,10 +1,10 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy ]
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = current_user.projects
+    @projects = Project.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -72,6 +72,25 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def goto_issue
+    logger.debug params
+    # @issue = Issue.find()
+    respond_to do |format|
+      format.html { redirect_to project_issue_path(project_id: params[:project_id], id: params[:issue_id])}
+    end
+  end
+
+  def search_issue
+    query = params[:q]
+    @issues = Issue.all.where('name LIKE ? AND project_id = ?', "%#{query}%", params[:project_id])
+    logger.debug @issues.to_a
+    respond_to do |format|
+      format.html { redirect_to issues_url }
+      format.json { render json: @issues, only: [:id, :name, :project_id], :root => false }
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

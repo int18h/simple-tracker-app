@@ -24,7 +24,7 @@ class IssuesController < ApplicationController
 
   # GET /issues/new
   def new
-      #@issue = Issue.new
+
   end
 
   # GET /issues/1/edit
@@ -71,12 +71,6 @@ class IssuesController < ApplicationController
     end
   end
 
-  def search_issue
-    respond_to do |format|
-      format.html { redirect_to issues_url }
-      format.json { head :no_content }
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -88,7 +82,6 @@ class IssuesController < ApplicationController
     def set_issue_by_project
       @project = Project.find(params[:project_id])
       redirect_to @project, alert: 'You cannot create issue for closed project.' if (@project.closed?)
-      @issue = Issue.find_by(project_id: params[:project_id], user_id: current_user.id)
       begin
         @issue = Issue.new   
         @issue.owner = current_user

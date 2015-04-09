@@ -1,10 +1,13 @@
+<%
+   buttons = {:back => {:caption => 'Back', :class => 'btn btn-link', :path => teams_path} }
+   buttons[:edit] = {:caption => 'Edit', :class=>'btn btn-primary', :path => edit_team_path(@team)} if is_owner_of_team(@team)
+
+%>
 <%= header('h1', {
-  :title => 'Show Team', 
-  :text => "Show Team", 
-  :buttons => {
-    :edit => {:caption => 'Edit', :class=>'btn btn-primary', :path => edit_team_path(@team)},
-    :back => {:caption => 'Back', :class => 'btn btn-link', :path => teams_path}
-  }}) 
+                  :title => 'Show Team',
+                  :text => "Show Team",
+                  :buttons => buttons
+               })
 %>
 
 <div class="row">
