@@ -82,8 +82,7 @@ class IssuesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_issue
       @issue = Issue.find(params[:id])
-      @project = Project.find(params[:project_id])
-      #redirect_to @project, alert: 'You cannot update issue for closed project.' if @issue.
+      redirect_to @issue.project, alert: 'You cannot edit issue for closed project.' if @issue.project.closed? && action_name != "show"
     end
 
     def set_issue_by_project
