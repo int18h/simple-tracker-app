@@ -1,0 +1,33 @@
+<%= form_for(@workload) do |f| %>
+  <% if @workload.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@workload.errors.count, "error") %> prohibited this workload from being saved:</h2>
+
+      <ul>
+      <% @workload.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :hours %><br>
+    <%= f.text_field :hours %>
+  </div>
+  <div class="field">
+    <%= f.label :issues %><br>
+    <%= f.text_field :issues %>
+  </div>
+  <div class="field">
+    <%= f.label :users %><br>
+    <%= f.text_field :users %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

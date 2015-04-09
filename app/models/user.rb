@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :teams, dependent: :destroy
   has_many :projects, dependent: :destroy
+  has_many :workloads, dependent: :destroy
   #has_many :issues, depedent: :destroy
 
   has_and_belongs_to_many :in_teams, class_name: 'Team', dependent: :destroy
