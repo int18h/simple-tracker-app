@@ -4,6 +4,8 @@ class CreateIssues < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.integer :user_id
+      t.integer :owner_id
+      t.float :estimate_time, precision: 5, scale: 3
       t.integer :project_id
 
       t.timestamps null: false

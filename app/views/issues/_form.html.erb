@@ -1,33 +1,6 @@
-<%= form_for(@issue) do |f| %>
-  <% if @issue.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
-
-      <ul>
-      <% @issue.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :project_id %><br>
-    <%= f.number_field :project_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= bootstrap_form_for(@issue, :url => project_issues_path(params[:project_id])) do | f |%>
+  <%= f.text_field :name %>
+  <%= f.collection_select :worker, @project.team.users, :id, :full_name, {prompt: "Select current worker "}, {class: "form-control"} %>
+  <%= f.text_area :description %>
+  <%= f.submit %>
 <% end %>

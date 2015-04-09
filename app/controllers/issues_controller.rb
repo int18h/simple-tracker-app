@@ -1,10 +1,11 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_issues_by_project, only: [:index]
+  before_action :set_issue_by_project, only: [:new, :create]
   # GET /issues
   # GET /issues.json
   def index
-    @issues = Issue.all
+    puts YAML::dump(params)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -23,7 +24,7 @@ class IssuesController < ApplicationController
 
   # GET /issues/new
   def new
-    @issue = Issue.new
+      @issue = Issue.new
   end
 
   # GET /issues/1/edit
@@ -33,11 +34,11 @@ class IssuesController < ApplicationController
   # POST /issues
   # POST /issues.json
   def create
-    @issue = Issue.new(issue_params)
+    @issue = @project.issues.build(issue_params)
 
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to @issue, notice: 'Issue was successfully created.' }
+        format.html { redirect_to @project, notice: 'Issue was successfully created.' }
         format.json { render json: @issue, status: :created }
       else
         format.html { render action: 'new' }
@@ -74,12 +75,29 @@ class IssuesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to issues_url }
       format.json { head :no_content }
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_issue
       @issue = Issue.find(params[:id])
+      #redirect_to @project, alert: 'You cannot update issue for closed project.' if @issue.
+    end
+
+    def set_issue_by_project
+      @project = Project.find(params[:project_id])
+      redirect_to @project, alert: 'You cannot create issue for closed project.' if (@project.closed?)
+      @issue = Issue.find_by(project_id: params[:project_id], user_id: current_user.id)
+      begin
+        @issue = Issue.new   
+        @issue.user_id = current_user.id
+      end if @issue.nil?
+    end
+
+    def set_issues_by_project
+      @issues = Issue.all.find_by(project_id: params[:project_id], user_id: current_user.id)
+      @issues = [] if @issues.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

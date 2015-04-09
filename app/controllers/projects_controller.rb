@@ -33,10 +33,12 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = current_user.projects.build(project_params)
-
+    #@project = current_user.projects.build(project_params)
+    @project = Project.create(project_params)
+    @project.owner = current_user
     respond_to do |format|
       if @project.save
+        @project.team = current_user.in_teams.find(project_params[:team_id])
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created }
       else
@@ -51,6 +53,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
+        @project.team = current_user.in_teams.find(project_params[:team_id])
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { head :no_content }
       else
@@ -78,6 +81,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name)
+      params.require(:project).permit(:name, :team_id, :user_id, :status)
     end
 end
