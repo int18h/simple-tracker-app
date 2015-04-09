@@ -1,0 +1,8 @@
+<%= bootstrap_form_for([@project, @issue]) do | f |%>
+  <%= f.text_field :name %>
+  <%= f.collection_select :user_id, @project.team.users, :id, :full_name, {prompt: "Select current worker "}, {class: "form-control"} %>
+  <%= f.number_field :estimated_hours %>
+  <%= f.select :status, options_for_select(Issue.statuses.map {|k, v| [k.humanize.capitalize, k]}), {prompt: "Select status"}, {class: "form-control"} %>
+  <%= f.text_area :description %>
+  <%= f.submit %>
+<% end %>

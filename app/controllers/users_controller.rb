@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    redirect_to dashboard_path if signed_in?
     @user = User.new
   end
 
@@ -19,25 +20,29 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
+    if (@user.id != current_user.id)
+      redirect_to dashboard_path
+    end
+  end
+
+  def show
     @user = current_user
-    # @user = User.find(params[:id])
   end
 
   def update
-    #puts YAML::dump(params)
-    puts YAML::dump(current_user)
     if current_user.update_attributes(user_params)
       flash.now[:success] = "Profile updated."
       redirect_to dashboard_path
     else
       flash.now[:danger] = "Could not update your profile."
+      @user = current_user
       render 'edit'
     end
     #puts YAML::dump(current_user)
   end
 
   def forgot_password
-    puts YAML::dump(params)
     @user = User.find_by_email(params[:email])
     if (!@user.nil?) 
       UserMailer.forgot_password_email(@user).deliver_later

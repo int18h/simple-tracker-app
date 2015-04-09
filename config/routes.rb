@@ -1,7 +1,19 @@
 Rails.application.routes.draw do
-  resources :projects
+#  resources :workloads
+  resources :projects do
+    get 'search_issue'
+    post 'goto_issue'
+    resources :issues do 
+        resources :workloads
+    end
+  end
+  resources :teams
   resources :teams do 
-    resources :workers
+    member do
+      delete 'remove_member'
+      post   'add_member'
+      get    'search_member'
+    end
   end
   resources :users
   resources :sessions, only: [:new, :create, :destroy]  
@@ -11,6 +23,8 @@ Rails.application.routes.draw do
   match '/forgot', to: 'users#forgot_password', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
+  match '/logtime', to: 'site#log_time', via: 'post'
+  match '/searchissue', to: 'site#search_for_issue', via: 'get'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -16,7 +16,15 @@
   display: inline-block !important;
 }
 
+.table-responsive > .table > tbody > tr:first-child > td {
+  border-top: 0px !important;
+}
+
 #menu-toggle > .glyphicon {
   top: 3px;
   right: 5px;
+}
+
+.gravatar.small {
+  width: 50px;
 }

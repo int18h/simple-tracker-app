@@ -1,7 +1,8 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <%= profile_link %>
+            <%= gravatar_for current_user, 'small' %>
+            <%= profile_link_to_current_user %>
         </li>
         <li>
             <%= link_to "Dashboard", dashboard_path %>

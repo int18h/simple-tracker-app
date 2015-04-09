@@ -1,6 +1,8 @@
-<%= page_header("Edit Project", "Edit Project", projects_path) %>
+<%= page_header('Editing Project', "#{@project.name}", teams_path) %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @project %> 
-<%= link_to 'Back', projects_path %>
+<div class="row">
+  <div class="col-md-6 col-lg-6">
+    <h5 class="page-header">Project information</h5>
+    <%= render 'form' %>
+  </div>
+</div>

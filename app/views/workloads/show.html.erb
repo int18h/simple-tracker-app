@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @workload.description %>
+</p>
+
+<p>
+  <strong>Hours:</strong>
+  <%= @workload.hours %>
+</p>
+
+<p>
+  <strong>Issues:</strong>
+  <%= @workload.issues %>
+</p>
+
+<p>
+  <strong>Users:</strong>
+  <%= @workload.users %>
+</p>
+
+<%= link_to 'Edit', edit_workload_path(@workload) %> |
+<%= link_to 'Back', workloads_path %>

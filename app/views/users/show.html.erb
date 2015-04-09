@@ -1,0 +1,26 @@
+<%= header('h1', {:title => 'My Profile', :text => "My Profile", :buttons => {:edit => {:caption => 'Edit', :class=>'btn btn-primary', :path => edit_user_path(@user)}}}) %>
+<div class="row box">
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" align="center">
+    <%= gravatar_for @user %>
+  </div>
+  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <td>First Name</td>
+            <td><%= @user.first_name %></td>
+          </tr>
+          <tr>
+            <td>Last Name</td>
+            <td><%= @user.last_name %></td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td><%= @user.email %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>        
+  </div>    
+</div>

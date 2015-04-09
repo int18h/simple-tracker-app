@@ -9,7 +9,11 @@
 </head>
 <body>
   <%= render('layouts/header') %>
-  <div id="wrapper" class="<%= show_sidebar_if(signed_in?)%>">
+  <% if signed_in? %>
+  <div id="wrapper" class="toggled">
+  <% else %>
+  <div id="wrapper-welcome">
+  <% end %>
   <%= render('layouts/sidebar') if signed_in? %>
   <% if (signed_in?) %>
     <div id="page-content-wrapper" class="no-padding">

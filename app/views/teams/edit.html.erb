@@ -1,5 +1,8 @@
-<%= page_header("Edit team", "Editing Team", teams_path) %>
+<%= page_header('Editing Team', "Editing team", teams_path) %>
 
-<%= render 'form' %>
-
-<%= render @team %>
+<div class="row">
+  <div class="col-md-6 col-lg-6">
+  <h5 class="page-header">Team information</h5>
+    <%= render 'form' %>
+  </div>
+  <%= render "teammates" %>

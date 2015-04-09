@@ -1,0 +1,6 @@
+<%= bootstrap_form_for([@workload.issue.project, @workload.issue, @workload]) do |f| %>
+    <%= f.collection_select :user_id, @workload.issue.project.team.users, :id, :full_name, {prompt: "Select user"} %>
+    <%= f.number_field :hours %>
+    <%= f.text_area :description %>
+    <%= f.submit %>
+<% end %>

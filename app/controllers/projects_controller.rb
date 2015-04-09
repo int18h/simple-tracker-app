@@ -1,15 +1,24 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy ]
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = current_user.projects
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @projects }
+    end
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @project }
+    end
   end
 
   # GET /projects/new
@@ -24,14 +33,16 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
-
+    #@project = current_user.projects.build(project_params)
+    @project = Project.create(project_params)
+    @project.owner = current_user
     respond_to do |format|
       if @project.save
+        @project.team = current_user.in_teams.find(project_params[:team_id])
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
+        format.json { render json: @project, status: :created }
       else
-        format.html { render :new }
+        format.html { render action: 'new' }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +53,11 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
+        @project.team = current_user.in_teams.find(project_params[:team_id])
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
+        format.json { head :no_content }
       else
-        format.html { render :edit }
+        format.html { render action: 'edit' }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
@@ -56,10 +68,29 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to projects_url }
       format.json { head :no_content }
     end
   end
+
+  def goto_issue
+    logger.debug params
+    # @issue = Issue.find()
+    respond_to do |format|
+      format.html { redirect_to project_issue_path(project_id: params[:project_id], id: params[:issue_id])}
+    end
+  end
+
+  def search_issue
+    query = params[:q]
+    @issues = Issue.all.where('name LIKE ? AND project_id = ?', "%#{query}%", params[:project_id])
+    logger.debug @issues.to_a
+    respond_to do |format|
+      format.html { redirect_to issues_url }
+      format.json { render json: @issues, only: [:id, :name, :project_id], :root => false }
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -69,6 +100,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :status, :finished_at, :user_id, :team_id)
+      params.require(:project).permit(:name, :team_id, :user_id, :status)
     end
 end

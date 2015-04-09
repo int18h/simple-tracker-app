@@ -11,31 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403144358) do
+ActiveRecord::Schema.define(version: 20150409120732) do
+
+  create_table "issues", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "user_id"
+    t.integer  "owner_id"
+    t.float    "estimate_time"
+    t.integer  "project_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "status",          default: 1
+    t.float    "estimated_hours"
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
-    t.integer  "status"
-    t.datetime "finished_at"
     t.integer  "user_id"
     t.integer  "team_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "status",     default: 1
   end
 
-  add_index "projects", ["team_id"], name: "index_projects_on_team_id"
-  add_index "projects", ["user_id"], name: "index_projects_on_user_id"
+  add_index "projects", ["name"], name: "index_projects_on_name", unique: true
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "owner_id"
   end
 
-  add_index "teams", ["owner_id"], name: "index_teams_on_owner_id"
-  add_index "teams", ["user_id"], name: "index_teams_on_user_id"
+  create_table "teams_users", id: false, force: :cascade do |t|
+    t.integer "team_id", null: false
+    t.integer "user_id", null: false
+  end
+
+  add_index "teams_users", ["team_id", "user_id"], name: "index_teams_users_on_team_id_and_user_id", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -61,5 +75,14 @@ ActiveRecord::Schema.define(version: 20150403144358) do
 
   add_index "workers", ["team_id"], name: "index_workers_on_team_id"
   add_index "workers", ["user_id"], name: "index_workers_on_user_id"
+
+  create_table "workloads", force: :cascade do |t|
+    t.string   "description"
+    t.float    "hours"
+    t.integer  "issue_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
 end
