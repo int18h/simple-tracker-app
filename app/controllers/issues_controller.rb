@@ -24,7 +24,7 @@ class IssuesController < ApplicationController
 
   # GET /issues/new
   def new
-      @issue = Issue.new
+      #@issue = Issue.new
   end
 
   # GET /issues/1/edit
@@ -34,10 +34,10 @@ class IssuesController < ApplicationController
   # POST /issues
   # POST /issues.json
   def create
-    @issue = @project.issues.build(issue_params)
-
+    #@issue = Issue.create(issue_params)
     respond_to do |format|
-      if @issue.save
+      if @issue.update_attributes(issue_params)
+        @issue.owner = User.find(issue_params[:user_id])
         format.html { redirect_to @project, notice: 'Issue was successfully created.' }
         format.json { render json: @issue, status: :created }
       else
@@ -52,7 +52,7 @@ class IssuesController < ApplicationController
   def update
     respond_to do |format|
       if @issue.update(issue_params)
-        format.html { redirect_to @issue, notice: 'Issue was successfully updated.' }
+        format.html { redirect_to @project, notice: 'Issue was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -82,6 +82,7 @@ class IssuesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_issue
       @issue = Issue.find(params[:id])
+      @project = Project.find(params[:project_id])
       #redirect_to @project, alert: 'You cannot update issue for closed project.' if @issue.
     end
 
@@ -91,7 +92,8 @@ class IssuesController < ApplicationController
       @issue = Issue.find_by(project_id: params[:project_id], user_id: current_user.id)
       begin
         @issue = Issue.new   
-        @issue.user_id = current_user.id
+        @issue.owner = current_user
+        @issue.project = @project
       end if @issue.nil?
     end
 
@@ -102,6 +104,6 @@ class IssuesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def issue_params
-      params.require(:issue).permit(:name, :description, :user_id, :project_id)
+      params.require(:issue).permit(:name, :description, :user_id, :project_id, :estimated_hours)
     end
 end

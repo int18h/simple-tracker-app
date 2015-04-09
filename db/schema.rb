@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409015726) do
+ActiveRecord::Schema.define(version: 20150409102457) do
 
   create_table "issues", force: :cascade do |t|
     t.string   "name"
@@ -20,18 +20,20 @@ ActiveRecord::Schema.define(version: 20150409015726) do
     t.integer  "owner_id"
     t.float    "estimate_time"
     t.integer  "project_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "status",        default: 1
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "status",          default: 1
+    t.float    "estimated_hours"
   end
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
     t.integer  "team_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "status",     default: 1
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "status",          default: 1
+    t.float    "estimated_hours"
   end
 
   add_index "projects", ["name"], name: "index_projects_on_name", unique: true
