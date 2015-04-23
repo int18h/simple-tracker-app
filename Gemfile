@@ -8,6 +8,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'quiet_assets'
+  gem 'fuubar'
 end
 
 group :test do
