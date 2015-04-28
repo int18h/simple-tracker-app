@@ -9,12 +9,15 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'quiet_assets'
   gem 'fuubar'
+  gem 'factory_girl_rails'
 end
 
 group :test do
   gem 'selenium-webdriver'
+  gem 'faker'
   gem 'capybara'
-  gem 'factory_girl_rails'
+  gem 'spork'
+  gem 'database_cleaner'
 end
 
 gem 'sass-rails'
@@ -22,9 +25,6 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jbuilder'
-gem 'guard-rspec'
-gem 'spork-rails'
-gem 'guard-spork'
 gem 'childprocess'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
