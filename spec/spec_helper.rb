@@ -5,7 +5,7 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
-  require 'rspec/autorun'
+  #require 'rspec/autorun'
   require "capybara/rspec"
   require 'database_cleaner'
  
@@ -13,11 +13,17 @@ Spork.prefork do
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
     config.use_transactional_fixtures = false
     config.infer_base_class_for_anonymous_controllers = false
- 
     config.order = "random"
     #смело убирайте след строку, если не используите devise
  #   config.include Devise::TestHelpers, :type => :controller
  
+    config.mock_with :rspec do |c|
+      c.syntax = [:should, :expect]
+    end
+    config.expect_with :rspec do |c|
+      c.syntax = [:should, :expect]
+    end
+
     #Database cleaner
     config.before(:suite) do
       DatabaseCleaner.strategy = :truncation

@@ -10,6 +10,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'fuubar'
   gem 'factory_girl_rails'
+  gem 'random_data'
 end
 
 group :test do
