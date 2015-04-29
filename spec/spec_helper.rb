@@ -7,12 +7,16 @@ Spork.prefork do
   require 'rspec/rails'
   #require 'rspec/autorun'
   require "capybara/rspec"
+  require  'support/factory_girl'
   require 'database_cleaner'
  
   RSpec.configure do |config|
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
     config.use_transactional_fixtures = false
     config.infer_base_class_for_anonymous_controllers = false
+    config.include Rails.application.routes.url_helpers
+    config.include Rails.application.helpers
+
     config.order = "random"
     #смело убирайте след строку, если не используите devise
  #   config.include Devise::TestHelpers, :type => :controller
@@ -36,6 +40,8 @@ Spork.prefork do
     config.after(:each) do
       DatabaseCleaner.clean
     end
+
+
   end
 end
  
