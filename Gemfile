@@ -19,6 +19,7 @@ group :test do
   gem 'capybara'
   gem 'spork'
   gem 'database_cleaner'
+  gem "show_me_the_cookies"
 end
 
 gem 'sass-rails'

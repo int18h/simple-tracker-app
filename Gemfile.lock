@@ -188,6 +188,8 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    show_me_the_cookies (2.6.0)
+      capybara (~> 2.0)
     spork (1.0.0rc4)
     sprockets (2.12.3)
       hike (~> 1.2)
@@ -245,6 +247,7 @@ DEPENDENCIES
   sdoc
   selectize-rails
   selenium-webdriver
+  show_me_the_cookies
   spork
   sqlite3
   uglifier

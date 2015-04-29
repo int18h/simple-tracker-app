@@ -2,13 +2,12 @@ require 'spec_helper'
 
 describe User do
   before(:each) do 
-    @user = FactoryGirl.create(:user)
+    @user = create(:user)
   end
-
-  it "must be valid user" do
+  context "validation rules" do
+    it "must be valid user" do
     expect(@user).to be_valid
-  end
-  context "validation" do
+    end
     it "should not have empty email" do 
       @user.email = ''
       expect(@user).to_not be_valid
@@ -28,5 +27,6 @@ describe User do
       @user.last_name = ''
       expect(@user).to_not be_valid
     end
+
   end
 end 
