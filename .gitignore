@@ -17,5 +17,5 @@
 /tmp
 
 # Ignore Jetbrains
-.idea
+/.idea  
 simple-tracker-app.iml
