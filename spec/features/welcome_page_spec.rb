@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 feature 'Site Controller' do
-  before(:each) do
-    @appName = 'Tracker App'
-  end
-
-  context "Unsigned User" do
+  let(:appName) { 'Tracker App' }
+  let(:user) { FactoryGirl.create :user }
+  
+  context "when unsigned user visit pages`" do
     scenario "Unsigned user visit welcome page" do
       visit root_path
       expect(page).to have_title("#{@appName} | Welcome")     
@@ -17,31 +16,19 @@ feature 'Site Controller' do
     end 
   end
   
-  scenario "Signed user visit welcome page", js: true do
-    visit signin_path
-    email = 'person@example.com'
-    password = 'password123'
-    user = FactoryGirl.create(:user, email: email, password: password) 
-    print "password_digest = #{user.password_digest}"
-    print "remember_tocken = #{user.remember_token}"
-    within('#sign-in-form') do
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-      click_button 'Sign In', exact: true
+  context "when signed user visit pages" do
+    scenario "Signed user visit welcome page" do
+      visit signin_path
+      sign_in_as user.email, user.password
+      
+      expect(current_path).to eq('/dashboard') 
     end
-    print page.driver.cookies[user.remember_token]
-    # find_field('Email').value.should eq email
-    # find_field('Password').value.should eq password
-    #print page.html
-    current_path.should == "/dashboard"
-    #print page.html
+    scenario "Signed user visit dashboard page" do
+      visit signin_path
+      sign_in_as user.email, user.password
 
-    #expect(page).to have_title("#{@appName} | Welcome")
-  end
-
-  scenario "Signed user visit dashboard page" do
-#    sign_in_as "dimko.goncharov@gmail.com", "w2nkh72"
-#    expect(page).to have_title("#{@appName} | Dashboard")
+      expect(current_path).to eq('/dashboard')
+    end
   end
 
 end

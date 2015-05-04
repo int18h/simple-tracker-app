@@ -4,9 +4,8 @@ module SignInHelpers
   end
 
   def sign_in_as(email, password, form_selector="#sign-in-form", js = false)
-    create :user, email: email, password: password
     visit signin_path
-    within(form_selector) do
+    within form_selector do
       fill_in 'Email', with: email
       fill_in 'Password', with: password
       click_button 'Sign In'

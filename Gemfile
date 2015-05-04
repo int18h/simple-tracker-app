@@ -11,12 +11,14 @@ group :development, :test do
   gem 'fuubar'
   gem 'factory_girl_rails'
   gem 'random_data'
+  gem 'shoulda-matchers'
 end
 
 group :test do
   gem 'selenium-webdriver'
   gem 'faker'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'spork'
   gem 'database_cleaner'
   gem "show_me_the_cookies"

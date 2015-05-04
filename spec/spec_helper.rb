@@ -30,18 +30,18 @@ Spork.prefork do
 
     #Database cleaner
     config.before(:suite) do
-      DatabaseCleaner.strategy = :truncation
+  #    DatabaseCleaner.strategy = :truncation
     end
  
     config.before(:each) do
-      DatabaseCleaner.start
+#      DatabaseCleaner.start
     end
  
     config.after(:each) do
-      DatabaseCleaner.clean
+ #     DatabaseCleaner.clean
     end
 
-
+    Capybara.javascript_driver = :webkit
   end
 end
  

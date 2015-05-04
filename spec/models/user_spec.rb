@@ -1,32 +1,32 @@
 require 'spec_helper'
 
 describe User do
-  before(:each) do 
-    @user = create(:user)
-  end
+  before { @user = FactoryGirl.create :user }
+  subject {@user}
+  
   context "validation rules" do
-    it "must be valid user" do
-    expect(@user).to be_valid
-    end
-    it "should not have empty email" do 
-      @user.email = ''
-      expect(@user).to_not be_valid
-    end
 
-    it "shoud not have wrong email" do 
-      @user.email = Random.alphanumeric
-      expect(@user).to_not be_valid
-    end
+    it { is_expected.to respond_to :first_name }
+    it { is_expected.to respond_to :last_name }
+    it { is_expected.to respond_to :email }
+    it { is_expected.to respond_to :password }
+    it { is_expected.to respond_to :password_confirmation }
 
-    it 'should not have empty first name' do
-      @user.first_name = ''
-      expect(@user).to_not be_valid
-    end
+    it { is_expected.to be_valid }    
 
-    it 'should not have empty last name' do
-      @user.last_name = ''
-      expect(@user).to_not be_valid
+    context "for user bio" do
+      it { is_expected.to validate_presence_of :first_name }
+      it { is_expected.to validate_presence_of :last_name }
+      it "must have full name" do
+        expect(subject.full_name).not_to eq('')
+      end
+    end
+    
+    context "for user email" do
+      it { is_expected.to validate_presence_of :email }
+      it { is_expected.to validate_uniqueness_of :email }  
     end
 
   end
+
 end 
